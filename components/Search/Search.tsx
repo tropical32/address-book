@@ -12,7 +12,7 @@
 export default function Search() {
   return (
     <header className="sticky top-0 z-10 bg-white shadow-sm">
-      <div className="p-5 responsive-wrapper">
+      <div className="p-5">
         <div className="flex items-center">
           <p className="text-2xl font-bold flex-1">Address Book</p>
           <a href="/settings">⚙️</a>
