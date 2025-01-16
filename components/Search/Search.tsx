@@ -22,7 +22,7 @@ export default function Search() {
 
         <input
           type="text"
-          className="mt-2 w-full rounded-md border border-gray-300 bg-white py-2 pl-2 placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="mt-2 w-full rounded-md border border-gray-300 bg-white py-2 pl-2 placeholder-gray-500"
           placeholder="🔎 Search users..."
         />
       </div>
