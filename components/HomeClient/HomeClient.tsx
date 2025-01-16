@@ -72,6 +72,11 @@ export default function HomeClient() {
       {!isLoading && !isLoading && !searchQuery && shouldFetchMoreUsers && (
         <InfiniteScrollTrigger onBottomReached={onBottomReached} />
       )}
+      {!shouldFetchMoreUsers && (
+        <p className="text-gray-500 text-center mt-8 mb-8">
+          End of users catalog.
+        </p>
+      )}
     </main>
   );
 }
