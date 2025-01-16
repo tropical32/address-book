@@ -12,13 +12,15 @@ import Nav from "@/components/Nav/Nav";
  */
 export default function Settings() {
   return (
-    <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <>
       <Nav />
-      <Nationalities />
+      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <Nationalities />
 
-      <p className="text-gray-500 text-center mt-4">
-        Select the nationality to be used with filtering.
-      </p>
-    </main>
+        <p className="text-gray-500 text-center mt-4">
+          Select the nationality to be used with filtering.
+        </p>
+      </main>
+    </>
   );
 }

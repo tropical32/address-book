@@ -67,20 +67,22 @@ export default function HomeClient() {
   }, [allUsers, searchQuery]);
 
   return (
-    <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <>
       <Search onSearchChangeAction={onSearchChangeAction} />
-      <AddressBook users={filteredUsers} />
-      {isLoading && (
-        <p className="text-gray-500 text-center mt-8 mb-8">Loading...</p>
-      )}
-      {!isLoading && !isLoading && !searchQuery && shouldFetchMoreUsers && (
-        <InfiniteScrollTrigger onBottomReached={onBottomReached} />
-      )}
-      {!shouldFetchMoreUsers && (
-        <p className="text-gray-500 text-center mt-8 mb-8">
-          End of users catalog.
-        </p>
-      )}
-    </main>
+      <main className="responsive-container">
+        <AddressBook users={filteredUsers} />
+        {isLoading && (
+          <p className="text-gray-500 text-center mt-8 mb-8">Loading...</p>
+        )}
+        {!isLoading && !isLoading && !searchQuery && shouldFetchMoreUsers && (
+          <InfiniteScrollTrigger onBottomReached={onBottomReached} />
+        )}
+        {!shouldFetchMoreUsers && (
+          <p className="text-gray-500 text-center mt-8 mb-8">
+            End of users catalog.
+          </p>
+        )}
+      </main>
+    </>
   );
 }
