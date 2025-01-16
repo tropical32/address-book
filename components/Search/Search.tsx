@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import useSWR from "swr";
 
 /**
  * The top bar of the app with a search field.
