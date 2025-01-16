@@ -1,5 +1,5 @@
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
-import HomeClient from "../HomeClient";
+import Home from "../../../app/page";
 import { expect, test, vi } from "vitest";
 import { afterEach, beforeEach } from "vitest";
 
@@ -29,7 +29,7 @@ afterEach(() => {
 });
 
 test("Searchbox presence", async () => {
-  render(<HomeClient />);
+  render(<Home />);
   expect(await screen.findByRole("searchbox")).toBeTruthy();
 });
 
@@ -43,14 +43,14 @@ test("Loading indicator is displayed when fetching data", async () => {
     }),
   }));
 
-  render(<HomeClient />);
+  render(<Home />);
   const loadingIndicator = await screen.findByTestId("loading-indicator");
   expect(loadingIndicator).toBeTruthy();
 });
 
 test("fetch real data", async () => {
   vi.unmock("swr");
-  render(<HomeClient />);
+  render(<Home />);
 
   await waitFor(
     async () => {
