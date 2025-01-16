@@ -94,7 +94,7 @@ export default function Dialog({ user }: DialogProps) {
             <address className="text-sm not-italic space-y-1">
               <p>
                 {nationalityCodeToFlag(user.nat as NationalityCode)}{" "}
-                {user.location.street.name} {user.location.street.name}
+                {user.location.street.name}
               </p>
               <p>
                 {user.location.city}, {user.location.state}
