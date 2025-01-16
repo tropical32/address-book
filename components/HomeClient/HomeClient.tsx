@@ -81,6 +81,11 @@ export default function HomeClient() {
             End of users catalog.
           </p>
         )}
+        {searchQuery && shouldFetchMoreUsers && (
+          <p className="text-gray-500 text-center mt-8 mb-8">
+            Automatic loading disabled when searching.
+          </p>
+        )}
       </main>
     </>
   );
