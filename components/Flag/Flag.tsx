@@ -2,6 +2,8 @@ interface FlagProps {
   flag: string;
   description: string;
   code: string;
+  onClick: (code: string) => void;
+  isSelected: boolean;
 }
 
 /**
@@ -14,14 +16,23 @@ interface FlagProps {
  * @param {string} props.flag The flag emoji.
  * @param {string} props.description A description of the flag.
  * @param {string} props.code The code of the flag.
+ * @param {(code: string) => void} props.onClick The handler to be called when the flag is clicked.
+ * @param {boolean} props.isSelected Whether the nationality is included for filtering
  *
  * @returns The rendered component.
  */
-export default function Flag({ flag, description, code }: FlagProps) {
+export default function Flag({
+  flag,
+  description,
+  code,
+  onClick,
+  isSelected,
+}: FlagProps) {
   return (
-    <div
+    <button
+      onClick={() => onClick(code)}
       key={code}
-      className="p-5 rounded-xl border cursor-pointer transition-shadow duration-200 hover:shadow-lg"
+      className={`${isSelected ? "border-blue-500" : ""} p-5 rounded-xl border cursor-pointer transition-shadow duration-200 hover:shadow-lg`}
     >
       <div className="text-sm font-medium">
         <div className="flex flex-col items-center">
@@ -30,6 +41,6 @@ export default function Flag({ flag, description, code }: FlagProps) {
           <div className="text-md">{description}</div>
         </div>
       </div>
-    </div>
+    </button>
   );
 }
