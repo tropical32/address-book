@@ -14,7 +14,7 @@ export default function Settings() {
   return (
     <>
       <Nav />
-      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <main className="responsive-container">
         <Nationalities />
 
         <p className="text-gray-500 text-center mt-4">
