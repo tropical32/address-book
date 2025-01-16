@@ -1,12 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import Flag from "./Flag";
+import Nationality from "./Nationality";
 
-const FR = "🇫🇷";
-const ES = "🇪🇸";
-const CH = "🇨🇭";
-const GB = "🇬🇧";
+export enum NationalityCode {
+  FR = "FR",
+  ES = "ES",
+  CH = "CH",
+  GB = "GB",
+}
+
+const NATIONALITY_SETTINGS = [
+  { code: NationalityCode.CH, description: "Swiss" },
+  { code: NationalityCode.ES, description: "Spanish" },
+  { code: NationalityCode.FR, description: "French" },
+  { code: NationalityCode.GB, description: "British" },
+];
 
 /**
  * Retrieves the currently selected nationalities from local storage.
@@ -45,7 +54,7 @@ function parseNationalities(): {
  *
  * @returns A section element containing the grid of flags.
  */
-export function Flags() {
+export default function Nationalities() {
   const [selectedNationalities, setSelectedNationalities] =
     useState(parseNationalities());
 
@@ -64,21 +73,14 @@ export function Flags() {
     localStorage.setItem("selectedCodes", codesStringified);
   }
 
-  const nationalities = [
-    { code: "CH", description: "Swiss", flag: CH },
-    { code: "ES", description: "Spanish", flag: ES },
-    { code: "FR", description: "French", flag: FR },
-    { code: "GB", description: "British", flag: GB },
-  ];
-
   return (
     <section className="w-full grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-      {nationalities.map((nationality) => (
-        <Flag
+      {NATIONALITY_SETTINGS.map((nationality) => (
+        <Nationality
           key={nationality.code}
           description={nationality.description}
           code={nationality.code}
-          flag={nationality.flag}
+          nationalityCode={nationality.code}
           onClick={onNationalityClicked}
           isSelected={selectedNationalities[nationality.code]}
         />

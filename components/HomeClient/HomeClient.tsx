@@ -2,10 +2,11 @@
 
 import useSWR from "swr";
 
-import AddressBook, { User } from "@/components/AddressBook/AddressBook";
+import AddressBook from "@/components/AddressBook/AddressBook";
 import Search from "@/components/Search/Search";
 import InfiniteScrollTrigger from "../InfiniteScrollTrigger/InfiniteScrollTrigger";
 import { useCallback, useMemo, useState } from "react";
+import { User } from "@/types/types";
 
 /**
  * The top level component for the home page.

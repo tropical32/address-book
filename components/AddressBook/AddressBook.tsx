@@ -1,18 +1,7 @@
 "use client";
 
+import { User } from "@/types/types";
 import AddressBookEntry from "./AddressBookEntry";
-
-export interface User {
-  email: string;
-  name: {
-    first: string;
-    last: string;
-    username: string;
-  };
-  picture: {
-    thumbnail: string;
-  };
-}
 
 interface AddressBookProps {
   users: User[];

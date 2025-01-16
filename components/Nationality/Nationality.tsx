@@ -1,5 +1,8 @@
+import { nationalityCodeToFlag } from "@/utils/utils";
+import { NationalityCode } from "./Nationalities";
+
 interface FlagProps {
-  flag: string;
+  nationalityCode: NationalityCode;
   description: string;
   code: string;
   onClick: (code: string) => void;
@@ -22,7 +25,7 @@ interface FlagProps {
  * @returns The rendered component.
  */
 export default function Flag({
-  flag,
+  nationalityCode,
   description,
   code,
   onClick,
@@ -36,7 +39,9 @@ export default function Flag({
     >
       <div className="text-sm font-medium">
         <div className="flex flex-col items-center">
-          <span className="text-5xl">{flag}</span>
+          <span className="text-5xl">
+            {nationalityCodeToFlag(nationalityCode)}
+          </span>
           <span className="text-2xl font-bold">{code}</span>
           <div className="text-md">{description}</div>
         </div>
