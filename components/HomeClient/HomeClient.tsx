@@ -4,8 +4,8 @@ import useSWR from "swr";
 
 import AddressBook, { User } from "@/components/AddressBook/AddressBook";
 import Search from "@/components/Search/Search";
-import InfiniteScroll from "../InfiniteScroll/InfiniteScroll";
-import { useCallback, useState } from "react";
+import InfiniteScrollTrigger from "../InfiniteScrollTrigger/InfiniteScrollTrigger";
+import { useCallback, useMemo, useState } from "react";
 
 /**
  * The top level component for the home page.
@@ -17,6 +17,7 @@ import { useCallback, useState } from "react";
  */
 export default function HomeClient() {
   const [allUsers, setAllUsers] = useState<User[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
 
   const fetcher = useCallback(
@@ -44,14 +45,28 @@ export default function HomeClient() {
     [],
   );
 
+  const onSearchChangeAction = useCallback((value: string) => {
+    setSearchQuery(value);
+  }, []);
+
+  const filteredUsers = useMemo(() => {
+    return allUsers.filter((user) => {
+      const fullName =
+        user.name.first.toLowerCase() + " " + user.name.last.toLowerCase();
+
+      return fullName.includes(searchQuery.toLowerCase());
+    });
+  }, [allUsers, searchQuery]);
+
   return (
     <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <Search />
-      <AddressBook users={allUsers} />
-      {isLoading ? (
+      <Search onSearchChangeAction={onSearchChangeAction} />
+      <AddressBook users={filteredUsers} />
+      {isLoading && (
         <p className="text-gray-500 text-center mt-8 mb-8">Loading...</p>
-      ) : (
-        <InfiniteScroll onBottomReached={onBottomReached} />
+      )}
+      {!isLoading && !isLoading && !searchQuery && (
+        <InfiniteScrollTrigger onBottomReached={onBottomReached} />
       )}
     </main>
   );

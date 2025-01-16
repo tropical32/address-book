@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-interface InfiniteScrollProps {
+interface InfiniteScrollTriggerProps {
   onBottomReached: (
     intersectionObserverEntry: IntersectionObserverEntry[],
   ) => void;
@@ -11,16 +11,16 @@ interface InfiniteScrollProps {
  * `onBottomReached` when the bottom of the element is
  * reached.
  *
- * @param {InfiniteScrollProps} props The props for the component.
+ * @param {InfiniteScrollTriggerProps} props The props for the component.
  * @param {(
  *   intersectionObserverEntry: IntersectionObserverEntry[],
  * ) => void} props.onBottomReached The function to be called when the bottom
  * of the element is reached.
  * @returns The rendered component.
  */
-export default function InfiniteScroll({
+export default function InfiniteScrollTrigger({
   onBottomReached,
-}: InfiniteScrollProps) {
+}: InfiniteScrollTriggerProps) {
   const observerRef = useRef(null);
 
   useEffect(() => {
