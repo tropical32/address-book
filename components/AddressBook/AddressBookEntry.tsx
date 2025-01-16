@@ -18,11 +18,12 @@ interface AddressBookEntryProps {
  */
 export default function AddressBookEntry({ user }: AddressBookEntryProps) {
   return (
-    <div
+    <article
       key={user.email}
       className="p-5 rounded-xl border cursor-pointer transition-shadow duration-200 hover:shadow-lg"
+      aria-label={`Contact details for ${user.name.first} ${user.name.last}`}
     >
-      <div className="text-sm font-medium">
+      <header className="text-sm font-medium">
         <div className="flex space-x-3">
           <Image
             src={user.picture.thumbnail}
@@ -32,18 +33,18 @@ export default function AddressBookEntry({ user }: AddressBookEntryProps) {
             height={10}
           />
           <div className="flex flex-col flex-1">
-            <div className="font-semibold">
+            <h2 className="font-semibold">
               {user.name.first} {user.name.last}
-            </div>
-            <div className="text-gray-700">@{user.login.username}</div>
+            </h2>
+            <p className="text-gray-700">@{user.login.username}</p>
           </div>
-          <span className="text-2xl">
+          <span className="text-2xl" aria-label={`Nationality: ${user.nat}`}>
             {nationalityCodeToFlag(user.nat as NationalityCode)}
           </span>
         </div>
-      </div>
+      </header>
 
       <p className="truncate text-sm text-gray-500 mt-2">{user.email}</p>
-    </div>
+    </article>
   );
 }

@@ -1,7 +1,7 @@
 import { nationalityCodeToFlag } from "@/utils/utils";
 import { NationalityCode } from "./Nationalities";
 
-interface FlagProps {
+interface NationalityProps {
   nationalityCode: NationalityCode;
   description: string;
   code: string;
@@ -30,21 +30,21 @@ export default function Flag({
   code,
   onClick,
   isSelected,
-}: FlagProps) {
+}: NationalityProps) {
   return (
     <button
+      aria-pressed={isSelected}
+      aria-label={`Select ${description} nationality`}
       onClick={() => onClick(code)}
       key={code}
       className={`${isSelected ? "border-blue-500" : ""} p-5 rounded-xl border cursor-pointer transition-shadow duration-200 hover:shadow-lg`}
     >
-      <div className="text-sm font-medium">
-        <div className="flex flex-col items-center">
-          <span className="text-5xl">
-            {nationalityCodeToFlag(nationalityCode)}
-          </span>
-          <span className="text-2xl font-bold">{code}</span>
-          <div className="text-md">{description}</div>
-        </div>
+      <div className="flex flex-col items-center text-sm font-medium">
+        <span className="text-5xl" role="img">
+          {nationalityCodeToFlag(nationalityCode)}
+        </span>
+        <span className="text-2xl font-bold">{code}</span>
+        <span className="text-md">{description}</span>
       </div>
     </button>
   );
