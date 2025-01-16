@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Address Book
 
-## Getting Started
+## Description
 
-First, run the development server:
+This is a React-based web application built with Next.js 15 and utilizing SWR for data fetching. It includes TailwindCSS for styling, ESLint for linting, Prettier for code formatting, and Vitest for testing. The app demonstrates functionality such as user search, filtering, and local storage persistence.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Node.js**: Ensure you have Node.js installed (>= 16.x recommended).
+- **pnpm**: Install pnpm globally using:
+  ```bash
+  npm install -g pnpm
+  ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Clone the repository
 
-## Learn More
+    git clone git@github.com:tropical32/address-book.git
+    cd address-book
 
-To learn more about Next.js, take a look at the following resources:
+## Install dependencies
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    pnpm install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Scripts
 
-## Deploy on Vercel
+Here are the available scripts to run, build, and test the application:
+### Development Server
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Start the development server:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    pnpm dev
+
+This runs the app locally on http://localhost:3000 with Turbopack for fast builds.
+### Build for Production
+
+Build the app for production:
+
+    pnpm build
+
+### Start the Production Server
+
+After building, start the production server:
+
+    pnpm start
+
+### Run Tests
+
+Run all tests with Vitest:
+
+    pnpm test
+
+### Coverage Report
+
+Generate a test coverage report:
+
+    pnpm coverage
+
+### Lint Code
+
+Lint the codebase using ESLint:
+
+    pnpm lint
+
+### Features
+
+* User Search: Search users and filter results dynamically.
+* SWR Integration: Efficient data fetching with cache revalidation.
+* Local Storage Persistence: Nationality selections are saved locally for consistency.
+* TailwindCSS Styling: Modern and responsive design.
