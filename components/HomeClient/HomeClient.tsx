@@ -29,21 +29,19 @@ export default function HomeClient() {
   const selectedNationalities = useMemo(() => getSelectedNationalities(), []);
 
   const fetcher = useCallback(
-    async (url: string) => {
-      const res = await fetch(url);
-      const json = await res.json();
-      const results: User[] = json.results;
-
-      setAllUsers([...allUsers, ...results]);
-    },
-    [allUsers],
+    (url: string) => fetch(url).then((res) => res.json()),
+    [],
   );
 
   const url = useMemo(
     () => constructSearchParam(selectedNationalities, page),
     [page, selectedNationalities],
   );
-  const { isLoading } = useSWR(url, fetcher);
+  const { isLoading } = useSWR(url, fetcher, {
+    onSuccess: (data) => {
+      setAllUsers((allUsers) => [...allUsers, ...data.results]);
+    },
+  });
 
   const onBottomReached = useCallback(
     (intersectionObserverEntry: IntersectionObserverEntry[]) => {
