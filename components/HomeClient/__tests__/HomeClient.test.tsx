@@ -1,8 +1,7 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import HomeClient from "../HomeClient";
 import { expect, test, vi } from "vitest";
 import { afterEach, beforeEach } from "vitest";
-import * as SWR from "swr";
 
 beforeEach(() => {
   const mockIntersectionObserver = vi.fn();
