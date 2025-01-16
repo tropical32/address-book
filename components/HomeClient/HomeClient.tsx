@@ -19,6 +19,10 @@ export default function HomeClient() {
   const [allUsers, setAllUsers] = useState<User[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
+  const shouldFetchMoreUsers = useMemo(
+    () => allUsers.length < 1000,
+    [allUsers],
+  );
 
   const fetcher = useCallback(
     async (url: string) => {
@@ -65,7 +69,7 @@ export default function HomeClient() {
       {isLoading && (
         <p className="text-gray-500 text-center mt-8 mb-8">Loading...</p>
       )}
-      {!isLoading && !isLoading && !searchQuery && (
+      {!isLoading && !isLoading && !searchQuery && shouldFetchMoreUsers && (
         <InfiniteScrollTrigger onBottomReached={onBottomReached} />
       )}
     </main>
