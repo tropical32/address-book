@@ -37,7 +37,16 @@ export default function Flag({
       aria-label={`Select ${description} nationality`}
       onClick={() => onClick(code)}
       key={code}
-      className={`${isSelected ? "border-blue-500" : ""} p-5 rounded-xl border cursor-pointer transition-shadow duration-200 hover:shadow-lg`}
+      className={`
+        ${isSelected ? "border-blue-500" : ""} 
+        p-5
+        rounded-xl
+        border
+        cursor-pointer
+        transition-shadow
+        duration-200
+        hover:shadow-lg
+      `}
     >
       <div className="flex flex-col items-center text-sm font-medium">
         <span className="text-5xl" role="img">

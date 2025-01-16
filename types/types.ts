@@ -11,4 +11,14 @@ export interface User {
     thumbnail: string;
   };
   nat: string;
+  phone: string;
+  cell: string;
+  location: {
+    city: string;
+    state: string;
+    postcode: string;
+    street: {
+      name: string;
+    };
+  };
 }

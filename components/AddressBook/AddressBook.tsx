@@ -2,6 +2,8 @@
 
 import { User } from "@/types/types";
 import AddressBookEntry from "./AddressBookEntry";
+import Dialog from "../Dialog/Dialog";
+import { useCallback, useState } from "react";
 
 interface AddressBookProps {
   users: User[];
@@ -20,11 +22,23 @@ interface AddressBookProps {
  */
 
 export default function AddressBook(props: AddressBookProps) {
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const onSelectUser = useCallback((user: User) => {
+    setSelectedUser(user);
+  }, []);
+
   return (
-    <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-      {props.users.map((user) => (
-        <AddressBookEntry key={user.email} user={user} />
-      ))}
-    </section>
+    <>
+      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+        {props.users.map((user) => (
+          <AddressBookEntry
+            key={user.email}
+            user={user}
+            onSelectUser={onSelectUser}
+          />
+        ))}
+      </section>
+      {selectedUser && <Dialog user={selectedUser} />}
+    </>
   );
 }
