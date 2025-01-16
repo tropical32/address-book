@@ -8,6 +8,7 @@ import InfiniteScrollTrigger from "../InfiniteScrollTrigger/InfiniteScrollTrigge
 import { useCallback, useMemo, useState } from "react";
 import { User } from "@/types/types";
 import { constructSearchParam, getSelectedNationalities } from "@/utils/utils";
+import Loading from "../Loading/Loading";
 
 /**
  * The top level component for the home page.
@@ -71,10 +72,8 @@ export default function HomeClient() {
       <Search onSearchChangeAction={onSearchChangeAction} />
       <main className="responsive-container">
         <AddressBook users={filteredUsers} />
-        {isLoading && (
-          <p className="text-gray-500 text-center mt-8 mb-8">Loading...</p>
-        )}
-        {!isLoading && !isLoading && !searchQuery && shouldFetchMoreUsers && (
+        {isLoading && <Loading />}
+        {!isLoading && !searchQuery && shouldFetchMoreUsers && (
           <InfiniteScrollTrigger onBottomReached={onBottomReached} />
         )}
         {!shouldFetchMoreUsers && (
