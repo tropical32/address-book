@@ -32,7 +32,7 @@ interface AddressBookProps {
 
 export default function AddressBook(props: AddressBookProps) {
   return (
-    <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+    <section className="responsive-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
       {props.users.map((user) => (
         <AddressBookEntry key={user.email} user={user} />
       ))}
