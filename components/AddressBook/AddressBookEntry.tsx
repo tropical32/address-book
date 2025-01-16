@@ -53,9 +53,7 @@ export default function AddressBookEntry({
         </div>
       </header>
 
-      <p className="text-left truncate text-sm text-gray-500 mt-2">
-        {user.email}
-      </p>
+      <p className="text-left text-sm text-gray-500 mt-2">{user.email}</p>
     </button>
   );
 }

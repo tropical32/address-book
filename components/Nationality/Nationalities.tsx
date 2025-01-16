@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Nationality from "./Nationality";
 import { parseNationalitiesLocalStorage } from "@/utils/utils";
 
@@ -27,9 +27,13 @@ const NATIONALITY_SETTINGS = [
  * @returns A section element containing the grid of flags.
  */
 export default function Nationalities() {
-  const [selectedNationalities, setSelectedNationalities] = useState(
-    parseNationalitiesLocalStorage(),
-  );
+  const [selectedNationalities, setSelectedNationalities] = useState<{
+    [code: string]: boolean;
+  }>({});
+
+  useEffect(() => {
+    setSelectedNationalities(parseNationalitiesLocalStorage());
+  }, []);
 
   function onNationalityClicked(code: string) {
     const selectedCodesObject = parseNationalitiesLocalStorage();

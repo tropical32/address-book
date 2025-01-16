@@ -35,8 +35,8 @@ export function nationalityCodeToFlag(code: NationalityCode) {
 export function parseNationalitiesLocalStorage(): {
   [code: string]: boolean;
 } {
-  const selectedCodesStringified = localStorage.getItem("selectedCodes") || "";
   try {
+    const selectedCodesStringified = localStorage.getItem("selectedCodes") || "";
     const parsedValue = JSON.parse(selectedCodesStringified);
     const isObject =
       typeof parsedValue === "object" &&
