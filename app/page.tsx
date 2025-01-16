@@ -23,7 +23,6 @@ const TMP_TOY_DATA = Array(5).fill({
  * @returns The top level component for the home page.
  */
 export default function Home() {
-  console.log(TMP_TOY_DATA);
   return (
     <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <Search />
