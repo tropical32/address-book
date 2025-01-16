@@ -24,7 +24,7 @@ interface NationalityProps {
  *
  * @returns The rendered component.
  */
-export default function Flag({
+export default function Nationality({
   nationalityCode,
   description,
   code,
@@ -33,6 +33,7 @@ export default function Flag({
 }: NationalityProps) {
   return (
     <button
+      data-testid={`nationality-button-${code}`}
       aria-pressed={isSelected}
       aria-label={`Select ${description} nationality`}
       onClick={() => onClick(code)}
