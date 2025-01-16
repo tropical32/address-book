@@ -8,6 +8,18 @@ interface DialogProps {
   user: User;
 }
 
+/**
+ * A modal dialog component that displays a user's detailed information.
+ *
+ * This component takes a `User` object as a prop and displays a modal dialog
+ * with the user's contact information and address. The dialog is only visible
+ * when the user is selected.
+ *
+ * @param {DialogProps} props The component props.
+ * @param {User} props.user The user object to display in the dialog.
+ *
+ * @returns The rendered dialog component.
+ */
 export default function Dialog({ user }: DialogProps) {
   return (
     <div
