@@ -23,6 +23,7 @@ export default function AddressBookEntry({
 }: AddressBookEntryProps) {
   return (
     <button
+      data-testid="address-book-entry"
       key={user.email}
       popoverTarget="address_popover"
       className="p-5 rounded-xl border cursor-pointer transition-shadow duration-200 hover:shadow-lg"

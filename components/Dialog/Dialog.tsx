@@ -23,6 +23,7 @@ interface DialogProps {
 export default function Dialog({ user }: DialogProps) {
   return (
     <div
+      data-testid="dialog"
       role="dialog"
       popover="auto"
       id="address_popover"
