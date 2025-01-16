@@ -26,6 +26,7 @@ beforeEach(() => {
 afterEach(() => {
   cleanup();
   vi.clearAllMocks();
+  vi.unmock("swr");
 });
 
 test("Searchbox presence", async () => {
@@ -48,9 +49,19 @@ test("Loading indicator is displayed when fetching data", async () => {
   expect(loadingIndicator).toBeTruthy();
 });
 
-test("useSWR is called", async () => {
+test("fetch real data", async () => {
+  vi.unmock("swr");
   render(<HomeClient />);
 
-  const mocked = vi.spyOn(SWR, "default");
-  expect(mocked).toHaveBeenCalledTimes(1);
+  await waitFor(
+    async () => {
+      const addressBookEntry =
+        await screen.findAllByTestId("address-book-entry");
+      return addressBookEntry;
+    },
+    { timeout: 5000 },
+  );
+
+  const addressBookEntries = await screen.findAllByTestId("address-book-entry");
+  expect(addressBookEntries).toHaveLength(50);
 });
