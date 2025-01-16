@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Nationality from "./Nationality";
+import { parseNationalitiesLocalStorage } from "@/utils/utils";
 
 export enum NationalityCode {
   FR = "FR",
@@ -18,35 +19,6 @@ const NATIONALITY_SETTINGS = [
 ];
 
 /**
- * Retrieves the currently selected nationalities from local storage.
- *
- * The selected nationalities are persisted as a JSON object in local storage
- * under the key "selectedCodes". The JSON object should have the nationality
- * code as the key and a boolean value indicating whether that nationality is
- * selected or not.
- *
- * @returns The currently selected nationalities as a JSON object.
- */
-function parseNationalities(): {
-  [code: string]: boolean;
-} {
-  const selectedCodesStringified = localStorage.getItem("selectedCodes") || "";
-  try {
-    const parsedValue = JSON.parse(selectedCodesStringified);
-    const isObject =
-      typeof parsedValue === "object" &&
-      parsedValue !== null &&
-      !Array.isArray(parsedValue);
-
-    if (isObject) return parsedValue;
-  } catch {
-    return {};
-  }
-
-  return {};
-}
-
-/**
  * A component that displays a grid of nationality flags.
  *
  * Users can select multiple flags and the selected flags are persisted in
@@ -55,11 +27,12 @@ function parseNationalities(): {
  * @returns A section element containing the grid of flags.
  */
 export default function Nationalities() {
-  const [selectedNationalities, setSelectedNationalities] =
-    useState(parseNationalities());
+  const [selectedNationalities, setSelectedNationalities] = useState(
+    parseNationalitiesLocalStorage(),
+  );
 
   function onNationalityClicked(code: string) {
-    const selectedCodesObject = parseNationalities();
+    const selectedCodesObject = parseNationalitiesLocalStorage();
 
     if (selectedCodesObject[code] === true) {
       selectedCodesObject[code] = false;

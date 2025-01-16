@@ -21,3 +21,54 @@ export function nationalityCodeToFlag(code: NationalityCode) {
 
   return String.fromCodePoint(...codePoints);
 }
+
+/**
+ * Retrieves the currently selected nationalities from local storage.
+ *
+ * The selected nationalities are persisted as a JSON object in local storage
+ * under the key "selectedCodes". The JSON object should have the nationality
+ * code as the key and a boolean value indicating whether that nationality is
+ * selected or not.
+ *
+ * @returns The currently selected nationalities as a JSON object.
+ */
+export function parseNationalitiesLocalStorage(): {
+  [code: string]: boolean;
+} {
+  const selectedCodesStringified = localStorage.getItem("selectedCodes") || "";
+  try {
+    const parsedValue = JSON.parse(selectedCodesStringified);
+    const isObject =
+      typeof parsedValue === "object" &&
+      parsedValue !== null &&
+      !Array.isArray(parsedValue);
+
+    if (isObject) return parsedValue;
+  } catch {
+    return {};
+  }
+
+  return {};
+}
+
+export function getSelectedNationalities() {
+  const selectedCodes = parseNationalitiesLocalStorage();
+  const selectedNationalities = Object.keys(selectedCodes).filter(
+    (code) => selectedCodes[code],
+  );
+  return selectedNationalities;
+}
+
+export function constructSearchParam(
+  selectedNationalities: string[],
+  page: number,
+) {
+  const url = new URL("https://randomuser.me/api/");
+  const selectedNationalitiesJoined = selectedNationalities.join(",");
+
+  url.searchParams.append("results", "50");
+  url.searchParams.append("page", page.toString());
+  url.searchParams.append("nat", selectedNationalitiesJoined);
+
+  return url;
+}

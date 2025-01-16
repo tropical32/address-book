@@ -7,6 +7,7 @@ import Search from "@/components/Search/Search";
 import InfiniteScrollTrigger from "../InfiniteScrollTrigger/InfiniteScrollTrigger";
 import { useCallback, useMemo, useState } from "react";
 import { User } from "@/types/types";
+import { constructSearchParam, getSelectedNationalities } from "@/utils/utils";
 
 /**
  * The top level component for the home page.
@@ -24,6 +25,7 @@ export default function HomeClient() {
     () => allUsers.length < 1000,
     [allUsers],
   );
+  const selectedNationalities = useMemo(() => getSelectedNationalities(), []);
 
   const fetcher = useCallback(
     async (url: string) => {
@@ -36,10 +38,11 @@ export default function HomeClient() {
     [allUsers],
   );
 
-  const { isLoading } = useSWR(
-    `https://randomuser.me/api/?results=50&page=${page}`,
-    fetcher,
+  const url = useMemo(
+    () => constructSearchParam(selectedNationalities, page),
+    [page, selectedNationalities],
   );
+  const { isLoading } = useSWR(url, fetcher);
 
   const onBottomReached = useCallback(
     (intersectionObserverEntry: IntersectionObserverEntry[]) => {
