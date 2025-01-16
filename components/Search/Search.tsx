@@ -31,6 +31,7 @@ export default function Search({ onSearchChangeAction }: SearchProps) {
         </div>
 
         <input
+          data-testid="search-input"
           type="search"
           role="searchbox"
           aria-label="Search users by name and last name."

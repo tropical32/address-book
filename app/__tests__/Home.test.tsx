@@ -1,4 +1,10 @@
-import { cleanup, render, screen, waitFor } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import Home from "../page";
 import { expect, test, vi } from "vitest";
 import { afterEach, beforeEach } from "vitest";
@@ -63,4 +69,29 @@ test("fetch real data", async () => {
 
   const addressBookEntries = await screen.findAllByTestId("address-book-entry");
   expect(addressBookEntries).toHaveLength(50);
+});
+
+test("Search functionality filters results", async () => {
+  vi.unmock("swr");
+  render(<Home />);
+
+  await waitFor(
+    async () => {
+      const addressBookEntry =
+        await screen.findAllByTestId("address-book-entry");
+      return addressBookEntry;
+    },
+    { timeout: 5000 },
+  );
+
+  const searchInput = await screen.findByTestId("search-input");
+  fireEvent.change(searchInput, { target: { value: "r" } });
+  const addressBookEntries = await screen.findAllByTestId("address-book-entry");
+  expect(addressBookEntries.length).toBeLessThan(50);
+  expect(addressBookEntries.length).toBeGreaterThan(1);
+
+  addressBookEntries.forEach((entry) => {
+    const name = entry.textContent?.toLowerCase() ?? "";
+    expect(name).toMatch(/r/);
+  });
 });
