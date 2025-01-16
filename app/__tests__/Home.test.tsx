@@ -1,5 +1,5 @@
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
-import Home from "../../../app/page";
+import Home from "../page";
 import { expect, test, vi } from "vitest";
 import { afterEach, beforeEach } from "vitest";
 
