@@ -1,6 +1,6 @@
 "use client";
 
-import useSWR from "swr";
+import useSWR, { preload } from "swr";
 
 import AddressBook from "@/components/AddressBook/AddressBook";
 import Search from "@/components/Search/Search";
@@ -34,7 +34,7 @@ export default function HomeClient() {
   );
 
   const url = useMemo(
-    () => constructSearchParam(selectedNationalities, page),
+    () => constructSearchParam(selectedNationalities, page).toString(),
     [page, selectedNationalities],
   );
   const { isLoading } = useSWR(url, fetcher, {
@@ -42,6 +42,12 @@ export default function HomeClient() {
       setAllUsers((allUsers) => [...allUsers, ...data.results]);
     },
   });
+
+  const preloadUrl = useMemo(
+    () => constructSearchParam(selectedNationalities, page + 1).toString(),
+    [page, selectedNationalities],
+  );
+  preload(preloadUrl, fetcher);
 
   const onBottomReached = useCallback(
     (intersectionObserverEntry: IntersectionObserverEntry[]) => {

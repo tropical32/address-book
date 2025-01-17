@@ -8,6 +8,7 @@ import {
 import Home from "../page";
 import { expect, test, vi } from "vitest";
 import { afterEach, beforeEach } from "vitest";
+import { SWRConfig } from "swr";
 
 beforeEach(() => {
   const mockIntersectionObserver = vi.fn();
@@ -28,14 +29,18 @@ beforeEach(() => {
   }));
 });
 
-afterEach(() => {
+afterEach(async () => {
   cleanup();
   vi.clearAllMocks();
   vi.unmock("swr");
 });
 
 test("Searchbox presence", async () => {
-  render(<Home />);
+  render(
+    <SWRConfig value={{ provider: () => new Map(), dedupingInterval: 0 }}>
+      <Home />
+    </SWRConfig>,
+  );
   expect(await screen.findByRole("searchbox")).toBeTruthy();
 });
 
@@ -49,14 +54,22 @@ test("Loading indicator is displayed when fetching data", async () => {
     }),
   }));
 
-  render(<Home />);
+  render(
+    <SWRConfig value={{ provider: () => new Map(), dedupingInterval: 0 }}>
+      <Home />
+    </SWRConfig>,
+  );
   const loadingIndicator = await screen.findByTestId("loading-indicator");
   expect(loadingIndicator).toBeTruthy();
 });
 
 test("fetch real data", async () => {
   vi.unmock("swr");
-  render(<Home />);
+  render(
+    <SWRConfig value={{ provider: () => new Map(), dedupingInterval: 0 }}>
+      <Home />
+    </SWRConfig>,
+  );
 
   await waitFor(
     async () => {
@@ -73,7 +86,11 @@ test("fetch real data", async () => {
 
 test("Search functionality filters results", async () => {
   vi.unmock("swr");
-  render(<Home />);
+  render(
+    <SWRConfig value={{ provider: () => new Map(), dedupingInterval: 0 }}>
+      <Home />
+    </SWRConfig>,
+  );
 
   await waitFor(
     async () => {
